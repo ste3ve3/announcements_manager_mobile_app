@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "scheme": "acme",
+    "web": {
+      "bundler": "metro"
+    },
+    "name": "flipside_task_manager_app",
+    "slug": "flipside_task_manager_app"
+  }
+}
