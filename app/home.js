@@ -1,20 +1,35 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Stack } from 'expo-router';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { COLORS } from '../theme';
+import HeaderIcon from '../components/home/elements/HeaderIcon';
+import HomeContainer from '../components/home';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Welcome to FlipSide Task Manager</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Stack.Screen 
+        options={{
+            headerStyle : {
+              backgroundColor: COLORS.tertiary
+            },
+            headerShadowVisible: false,
+            headerLeft: () => (
+                <HeaderIcon iconType="leftIcon" />
+            ),
+            headerRight: () => (
+                <HeaderIcon />
+            ),
+            headerTitle: ""
+        }}
+      />
+      <HomeContainer />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: COLORS.tertiary
   },
 });

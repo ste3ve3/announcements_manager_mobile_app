@@ -5,18 +5,6 @@
       "bundler": "metro"
     },
     "name": "flipside_task_manager_app",
-    "slug": "flipside_task_manager_app",
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/logo.png",
-        "backgroundColor": "#ffffff"
-      }
-    }
+    "slug": "flipside_task_manager_app"
   }
 }
