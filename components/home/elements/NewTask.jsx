@@ -1,20 +1,39 @@
+import React, { useRef } from 'react';
 import { Text, TouchableOpacity, StyleSheet, View } from "react-native"
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SIZES } from "../../../theme";
 import { LinearGradient } from 'expo-linear-gradient';
+import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import AddTaskForm from './AddTaskForm';
 
 const NewTask = () => {
+    const bottomSheetModalRef = useRef(null);
+
+    const handlePresentModal = () => {
+        bottomSheetModalRef.current?.present();
+    }
+
   return (
-    <LinearGradient
-        colors={[COLORS.tertiary, COLORS.lightSecondary]}
-        start={[0.5, 0]}
-        end={[0.5, 1]}
-        style={styles.container}>
-            <TouchableOpacity style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>Add new task</Text>
-                <Ionicons name="add" size={25} color={COLORS.white} />
-            </TouchableOpacity>
-    </LinearGradient> 
+    <BottomSheetModalProvider>
+        <LinearGradient
+            colors={[COLORS.tertiary, COLORS.lightSecondary]}
+            start={[0.5, 0]}
+            end={[0.5, 1]}
+            style={styles.container}>
+                <TouchableOpacity style={styles.buttonContainer} onPress={handlePresentModal}>
+                    <Text style={styles.buttonText}>Add new task</Text>
+                    <Ionicons name="add" size={25} color={COLORS.white} />
+                </TouchableOpacity>
+        </LinearGradient> 
+        <BottomSheetModal
+            ref={bottomSheetModalRef}
+            index={0}
+            snapPoints={["90%"]}
+            backgroundStyle={{ borderRadius: 20, backgroundColor: COLORS.primary }}
+        >
+            <AddTaskForm />
+        </BottomSheetModal>
+    </BottomSheetModalProvider>
   )
 }
 
