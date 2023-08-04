@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
-import { COLORS } from '../../../theme';
-import Checkbox from 'expo-checkbox';
+import { COLORS, SIZES } from '../../../theme';
+import { Picker } from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { AntDesign, Ionicons } from '@expo/vector-icons';
+import { AntDesign, Ionicons, FontAwesome5 } from '@expo/vector-icons';
 
-const AddTaskForm = () => {
+const AddTaskForm = ({ onClose }) => {
     const [mode, setMode] = useState("date")
     const [show, setShow] = useState(false)
 
@@ -38,25 +38,6 @@ const AddTaskForm = () => {
                         textAlignVertical="top"
                     />
                 </View>
-                
-                    <View style={styles.checkboxMainContainer}>
-                        <View style={styles.checkboxContainer}>
-                            <Text style={styles.checkboxText}>Not Important</Text>
-                            <Checkbox
-                                style={styles.checkbox}
-                                color={COLORS.white}
-                                value={false}
-                            />
-                        </View>
-                        <View style={styles.checkboxContainer}>
-                            <Text style={styles.checkboxText}>Important</Text>
-                            <Checkbox
-                                style={styles.checkbox}
-                                color={COLORS.white}
-                                value={false}
-                            />
-                        </View>
-                    </View>
                 <View style={styles.pickerButtonContainer}> 
                     <View>
                         <Text style={styles.inputLabel}>Date</Text>
@@ -82,7 +63,33 @@ const AddTaskForm = () => {
                         is24Hour={true}
                         display='default'
                     />
-                }     
+                }
+                <View>
+                    <Text style={styles.inputLabel}>Assign Task</Text>
+                    <View style={styles.assignButtonContainer}> 
+                        <View>
+                            <TouchableOpacity onPress={() => {}} style={styles.assignButton}>
+                                <Ionicons name="person" size={24} color="black" />
+                                <Text>Member</Text>
+                            </TouchableOpacity>
+                        </View>  
+                        <View>
+                            <TouchableOpacity onPress={() => {}} style={styles.assignButton}>
+                                <FontAwesome5 name="users" size={24} color="black" style={styles.current}/>
+                                <Text style={styles.current}>All team</Text>
+                            </TouchableOpacity>
+                        </View>  
+                    </View>
+                </View>
+                <View style={styles.submitButtonsContainer}>
+                    <TouchableOpacity style={styles.cancelButton} onPress={onClose}>
+                        <Text style={styles.buttonText}>Cancel</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.createButton}>
+                        <Text style={styles.buttonText}>Create</Text>
+                    </TouchableOpacity>
+                </View>   
             </View>
         </View>
     );
@@ -122,24 +129,6 @@ const styles = StyleSheet.create({
         paddingBottom: 5,
         fontWeight: "semibold"
     },
-    checkboxMainContainer : {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between"
-    },
-    checkboxContainer : {
-        flexDirection: "row",
-        alignItems: "center",
-        gap: 10
-    },
-    checkbox: {
-        width: 30,
-        height: 30,
-    },
-    checkboxText: {
-        color: COLORS.white,
-        fontSize: 16
-    },
     pickerButtonContainer : {
         flexDirection: "row",
         alignItems: "center",
@@ -154,6 +143,58 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         paddingVertical: 10,
         paddingHorizontal: 30,
+    },
+    assignButtonContainer : {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        backgroundColor: COLORS.white,  
+        borderRadius: 10,
+    },
+    assignButton : {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        backgroundColor: COLORS.white,
+        gap: 7,
+        borderRadius: 10,
+        paddingVertical: 12,
+        paddingHorizontal: 30,
+    },
+    createButton: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        backgroundColor: COLORS.secondary,
+        gap: 5,
+        borderRadius: 10,
+        paddingVertical: 13,
+        paddingHorizontal: 50, 
+    },
+    current: {
+        color: COLORS.secondary,
+        fontWeight: "bold"
+    },
+    cancelButton: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        borderWidth: 2,
+        borderColor: COLORS.secondary,
+        gap: 5,
+        borderRadius: 10,
+        paddingVertical: 11,
+        paddingHorizontal: 50,  
+    },
+    submitButtonsContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        marginVertical: 20
+    },
+    buttonText : {
+        color: COLORS.white,
+        fontSize: SIZES.medium
     }
 });
 

@@ -13,6 +13,10 @@ const NewTask = () => {
         bottomSheetModalRef.current?.present();
     }
 
+    const handleCloseModal = () => {
+        bottomSheetModalRef.current?.dismiss();
+    }
+
   return (
     <BottomSheetModalProvider>
         <LinearGradient
@@ -28,10 +32,10 @@ const NewTask = () => {
         <BottomSheetModal
             ref={bottomSheetModalRef}
             index={0}
-            snapPoints={["90%"]}
+            snapPoints={["100%"]}
             backgroundStyle={{ borderRadius: 20, backgroundColor: COLORS.primary }}
         >
-            <AddTaskForm />
+            <AddTaskForm onClose={handleCloseModal}/>
         </BottomSheetModal>
     </BottomSheetModalProvider>
   )

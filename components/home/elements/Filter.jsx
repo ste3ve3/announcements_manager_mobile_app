@@ -13,7 +13,7 @@ const Filter = () => {
                 </TouchableOpacity>
                 <Text style={styles.typesText()}>|</Text>
                 <TouchableOpacity>
-                    <Text style={styles.typesText()}>Important</Text>
+                    <Text style={styles.typesText()}>Mine</Text>
                 </TouchableOpacity>
             </View>
             <Picker
@@ -23,9 +23,10 @@ const Filter = () => {
                 // selectedValue={selectedItem}
                 // onValueChange={handleItemChange}
             >
-                <Picker.Item label="Ongoing" value="Ongoing" />
-                <Picker.Item label="Upcoming" value="Upcoming" />
-                <Picker.Item label="Completed" value="Completed" />
+                <Picker.Item label="Ernest Ruzindana" value="Ernest Ruzindana" />
+                <Picker.Item label="Aime Ndayambaje" value="Aime Ndayambaje" />
+                <Picker.Item label="Steve Ndicunguye" value="Steve Ndicunguye" />
+                <Picker.Item label="Benilde Rosalié Kabanyana" value="Benilde Rosalié Kabanyana" />
             </Picker>
         </View>
         
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
         width: 150,
         height: 40,
         color: COLORS.lightWhite
-      },
+    },
 })
 
 export default Filter

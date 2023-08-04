@@ -4,7 +4,9 @@ import "react-native-gesture-handler"
 const Layout = () => {
 
   return (
+    <>
       <Stack />
+    </>
   );
 };
 
