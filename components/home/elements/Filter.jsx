@@ -1,33 +1,58 @@
+import { useMemo, useState } from "react"
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native"  
 import { Picker } from '@react-native-picker/picker';
 import { SIZES, COLORS } from "../../../theme";
+import { useFetcher } from "../../../api";
+import DataChecker from "../../global/DataChecker";
 
-const Filter = () => {
+const Filter = ({ setCreatorId }) => {
     const isActive = true;
+    const { data , isLoading, isError } = useFetcher("/auth"); 
+    const [creator, setCreator] = useState('All')
+    const { staffMembers } = useMemo(() => {
+        if (data?.registeredUsers?.length) {
+          return { staffMembers: data?.registeredUsers };
+        }
+        return { staffMembers: [] };
+      }, [data?.registeredUsers]);
+
   return (
     <View style={styles.container}>
         <View style={styles.subContainer}>
             <View style={styles.types}>
                 <TouchableOpacity>
-                    <Text style={styles.typesText(isActive)}>All</Text>
-                </TouchableOpacity>
-                <Text style={styles.typesText()}>|</Text>
-                <TouchableOpacity>
-                    <Text style={styles.typesText()}>Mine</Text>
+                    <Text style={styles.typesText(isActive)}>Announcements</Text>
                 </TouchableOpacity>
             </View>
-            <Picker
-                style={styles.picker}
-                // mode="dropdown"
-                dropdownIconColor={COLORS.lightWhite}
-                // selectedValue={selectedItem}
-                // onValueChange={handleItemChange}
+            <DataChecker
+                title="Staff"
+                isLoading={isLoading}
+                isError={isError}
+                isEmpty={!isLoading && !isError && !staffMembers?.length}
             >
-                <Picker.Item label="Ernest Ruzindana" value="Ernest Ruzindana" />
-                <Picker.Item label="Aime Ndayambaje" value="Aime Ndayambaje" />
-                <Picker.Item label="Steve Ndicunguye" value="Steve Ndicunguye" />
-                <Picker.Item label="Benilde Rosalié Kabanyana" value="Benilde Rosalié Kabanyana" />
-            </Picker>
+                <Picker
+                    style={styles.picker}
+                    mode="dropdown"
+                    dropdownIconColor={COLORS.lightWhite}
+                    selectedValue={creator}
+                    onValueChange={(value) => {
+                        setCreator(value);
+                        const selectedStaff = staffMembers.find(
+                          (staff) => `${staff.firstName} ${staff.lastName}` === value
+                        );
+                        if (selectedStaff) {
+                            setCreatorId(selectedStaff._id);
+                        }
+                      }}
+                >
+                    <Picker.Item label="All" value="All" />
+                    {
+                        staffMembers.map((staff, index) => (
+                            <Picker.Item key={index} label={`${staff.firstName} ${staff.lastName}`} value={`${staff.firstName} ${staff.lastName}`} />
+                        ))
+                    }
+                </Picker>
+            </DataChecker>
         </View>
         
     </View>
@@ -51,7 +76,8 @@ const styles = StyleSheet.create({
     },
     typesText: (isActive) => ({
         color: isActive ? COLORS.secondary : COLORS.lightWhite,
-        fontWeight: isActive && "bold"
+        fontWeight: isActive && "bold",
+        fontSize: SIZES.medium
     }),
     picker: {
         width: 150,

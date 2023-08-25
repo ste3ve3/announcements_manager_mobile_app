@@ -4,7 +4,10 @@
     "web": {
       "bundler": "metro"
     },
-    "name": "flipside_task_manager_app",
-    "slug": "flipside_task_manager_app"
+    "android": {
+      "permissions": ["INTERNET"]
+    },
+    "name": "announcements_mobile_app",
+    "slug": "announcements_mobile_app"
   }
 }
