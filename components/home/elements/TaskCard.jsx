@@ -1,11 +1,11 @@
-import { Text, TouchableOpacity, View, StyleSheet, Image, FlatList } from "react-native"
-import { Entypo } from '@expo/vector-icons';
+import { Text, TouchableOpacity, View, StyleSheet, Image } from "react-native"
+import { Link } from 'expo-router';
 import { COLORS, SIZES } from "../../../theme";
 import { Ionicons, MaterialIcons, Feather } from '@expo/vector-icons';
 import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
 
 
-const TaskCard = ({title, role, creator, time, document, groupMembers, isImportant}) => {
+const TaskCard = ({id, title, role, firstName, creator, time, document, groupMembers, isImportant}) => {
     const renderItem = (item, index) => (
         <Image
           key={index}
@@ -33,22 +33,14 @@ const TaskCard = ({title, role, creator, time, document, groupMembers, isImporta
         <View style={styles.subContainer}>
             <View style={styles.titleContainer}>
                 <TouchableOpacity style={styles.plusIconContainer} >
-                    <Text style={{ color: COLORS.white, fontSize: 20 }}>S</Text>
+                    <Text style={{ color: COLORS.white, fontSize: 20 }}>{firstName.charAt(0)}</Text>
                 </TouchableOpacity>
                 <View style={styles.subTitleContainer}>
                     <Text style={styles.title} numberOfLines={1}>{creator}</Text>
-                    <Text style={styles.role} numberOfLines={1}>Staff</Text>
+                    <Text style={styles.role} numberOfLines={1}>{role}</Text>
                 </View>
             </View>
-            {
-                document ?
-                <View style={styles.fileContainer}>
-                    <MaterialIcons name="picture-as-pdf" size={24} color="black" />
-                    <Text numberOfLines={1}>Announcement attachment</Text>
-                </View>
-                :
-                <Text style={styles.description} numberOfLines={2}>{title}</Text>
-            }
+            <Text style={styles.description} numberOfLines={2}>{title}</Text>
         </View>
         <View style={styles.belowContainer}>
             <View style={styles.timeContainer}>
@@ -56,38 +48,13 @@ const TaskCard = ({title, role, creator, time, document, groupMembers, isImporta
                 {/* <Text style={styles.date}>{date}</Text> */}
             </View>
             <View style={styles.groupContainer}>
-                <TouchableOpacity style={styles.readAnnouncement}>
-                    <Text style={styles.readText}>Read Announcement</Text>
-                    <Ionicons name="navigate" size={24} color="white" />
-                </TouchableOpacity>
+                <Link href={`/announcement/${id}`} >   
+                    <View style={styles.readAnnouncement}> 
+                        <Text style={styles.readText}>Read Announcement</Text>
+                        <Ionicons name="navigate" size={24} color="white" />
+                    </View>
+                </Link>
             </View>
-        </View>
-        <View style={styles.moreIcon}>
-                <Menu>
-                    <MenuTrigger customStyles={triggerStyles}>
-                        <MaterialIcons name="more-vert" size={24} color={COLORS.lightWhite} />
-                    </MenuTrigger>
-                    <MenuOptions customStyles={optionsStyles}>
-                        <MenuOption onSelect={() => {}}>
-                        <View style={styles.menuOption}>
-                            <Feather name="check-circle" size={24} color="green" />
-                            <Text style={styles.menuOptionText("green")}>Mark as done</Text>
-                        </View>
-                        </MenuOption>
-                        <MenuOption onSelect={() => {}}>
-                        <View style={styles.menuOption}>
-                            <MaterialIcons name="edit" size={24} color={COLORS.primary} />
-                            <Text style={styles.menuOptionText(COLORS.primary)}>Edit</Text>
-                        </View>
-                        </MenuOption>
-                        <MenuOption onSelect={() => {}}>
-                        <View style={styles.menuOption}>
-                            <MaterialIcons name="delete" size={24} color="red" />
-                            <Text style={styles.menuOptionText("red")}>Delete</Text>
-                        </View>
-                        </MenuOption>
-                    </MenuOptions>
-                </Menu>
         </View>
     </TouchableOpacity>
   )

@@ -12,7 +12,10 @@ import DataChecker from "../global/DataChecker"
 const HomeContainer = () => {
     const [creatorId, setCreatorId] = useState('')
     const [category, setCategory] = useState('')
-    const { data , isLoading, isError } = useFetcher(`/announcement?creatorId=${creatorId}&category=${category}`); 
+    const { data , isLoading, isError } = useFetcher(`/announcement?creatorId=${creatorId}&category=${category}`, {
+        revalidateOnFocus: true,
+        refreshInterval: 5000,
+      });  
     const { announcements } = useMemo(() => {
         if (data?.data?.length) {
           return { announcements: data?.data };
@@ -37,7 +40,9 @@ const HomeContainer = () => {
                                 <MenuProvider skipInstanceCheck={true}>
                                     <TaskCard 
                                         title={item.title}
-                                        role={item.role}
+                                        role={item.staffCreator.role}
+                                        id={item._id}
+                                        firstName={item.staffCreator.firstName}
                                         creator={`${item.staffCreator.firstName} ${item.staffCreator.lastName}`}
                                         document={item.announcementFile}
                                         time={item.time}
@@ -51,7 +56,7 @@ const HomeContainer = () => {
                     } 
                 </DataChecker>          
         </ScrollView>
-        <NewTask />
+        {/* <NewTask /> */}
     </>
   )
 }
