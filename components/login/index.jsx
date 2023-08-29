@@ -46,8 +46,8 @@ const LoginContainer = () => {
               text1: 'Logged In Successfully!',
               position: 'top',
             });
-            navigation.navigate('home');
             setFormData(initFormData);
+            navigation.navigate('home');
           } catch (error) {
         
             if (error?.response?.data?.message) {
