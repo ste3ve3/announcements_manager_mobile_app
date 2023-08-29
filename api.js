@@ -3,7 +3,7 @@ import useSWR from 'swr';
 // import { REACT_APP_BASE_URL } from '@env';
 
 export const API = axios.create({
-    baseURL: "http://192.168.8.142:5000",
+    baseURL: "https://announcements-be-5c347630de4e.herokuapp.com",
     withCredentials: true
 });
 

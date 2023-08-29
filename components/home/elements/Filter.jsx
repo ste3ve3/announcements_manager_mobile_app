@@ -37,11 +37,15 @@ const Filter = ({ setCreatorId }) => {
                     selectedValue={creator}
                     onValueChange={(value) => {
                         setCreator(value);
-                        const selectedStaff = staffMembers.find(
-                          (staff) => `${staff.firstName} ${staff.lastName}` === value
-                        );
-                        if (selectedStaff) {
-                            setCreatorId(selectedStaff._id);
+                        if (value === "All") {
+                            setCreatorId("");
+                        } else {
+                            const selectedStaff = staffMembers.find(
+                                (staff) => `${staff.firstName} ${staff.lastName}` === value
+                            );
+                            if (selectedStaff) {
+                                setCreatorId(selectedStaff._id);
+                            }
                         }
                       }}
                 >

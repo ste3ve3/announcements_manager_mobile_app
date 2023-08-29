@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     titleName: {
-        color: COLORS.white,
+        color: "white",
         fontWeight: "bold",
         fontSize: SIZES.medium
     },
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     role: {
-        color: COLORS.white,
+        color: "white",
         fontSize: 12
     },
     fileContainer: {

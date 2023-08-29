@@ -3,12 +3,12 @@ import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native'
 import { MaterialCommunityIcons, Ionicons, AntDesign, Feather } from '@expo/vector-icons'; 
 import { SIZES, COLORS } from '../../../theme';
 
-const HeaderIcon = ({ iconType, onPress }) => {
+const HeaderIcon = ({ iconType, onPress, onNavPress }) => {
   return (
     <>
         {
             iconType == "leftIcon" ? 
-            <TouchableOpacity onPress={onPress}>
+            <TouchableOpacity onPress={onNavPress}>
                 <MaterialCommunityIcons name="view-dashboard-outline" size={27} color= { COLORS.lightWhite } />
             </TouchableOpacity>
                 :
@@ -21,13 +21,13 @@ const HeaderIcon = ({ iconType, onPress }) => {
                     />
                 </View>
                 <View style={styles.searchIcon}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={onPress}>
                         <Ionicons name="search-outline" size={27} color= { COLORS.lightWhite } />
                     </TouchableOpacity>
                 </View>
-            </View>
-            
+            </View>   
         }
+
     </>
     
   )
@@ -49,7 +49,8 @@ const styles = StyleSheet.create({
         height: 65,
     },
     searchIcon: {
-        marginRight: 10
+        marginRight: 10,
+        position: "relative"
     }
 })
 

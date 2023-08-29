@@ -6,7 +6,8 @@ import { AntDesign, Entypo } from '@expo/vector-icons';
 const { width, height } = Dimensions.get('window');
 import { API } from "../../api";
 import Toast from 'react-native-toast-message';
-import { useNavigation } from '@react-navigation/native';  
+import { useNavigation } from '@react-navigation/native'; 
+import AsyncStorage from '@react-native-async-storage/async-storage'; 
 
 const initState = { loading: false, error: null };
 
@@ -38,25 +39,16 @@ const LoginContainer = () => {
         }
         try {
             setState((prev) => ({ ...prev, loading: true }));
-        
-            await API.post(`/student/login`, formData);
-        
+            const result = await API.post(`/student/login`, formData);
+            await AsyncStorage.setItem('loggedInUser', JSON.stringify(result.data.data));
             Toast.show({
               type: 'success',
               text1: 'Logged In Successfully!',
               position: 'top',
             });
-        
             navigation.navigate('home');
             setFormData(initFormData);
           } catch (error) {
-            setState((prev) => ({
-              ...prev,
-              error:
-                error?.response?.data?.message ||
-                error?.message ||
-                'Unknown error occurred, please try again.',
-            }));
         
             if (error?.response?.data?.message) {
               setNormalAuthError(error?.response?.data?.message);
@@ -97,7 +89,7 @@ const LoginContainer = () => {
                         <TextInput
                             style={styles.input}
                             placeholder="Enter your reg number..."
-                            keyboardType="numeric"
+                            keyboardType="default"
                             onChangeText={(value) => handleChange('regNumber', value)}
                         />
                     </View>
@@ -108,7 +100,7 @@ const LoginContainer = () => {
                             style={styles.input}
                             placeholder="Enter your password..."
                             secureTextEntry={!showPassword}
-                            keyboardType="numeric"
+                            keyboardType="default"
                             onChangeText={(value) => handleChange('password', value)}
                             />
                             <TouchableOpacity onPress={togglePasswordVisibility} style={styles.eyeContainer}>
@@ -170,7 +162,8 @@ const styles = StyleSheet.create({
         padding: 25,
         rowGap: 20,
         borderWidth: 1,
-        margin: 10,
+        marginVertical: 10,
+        marginHorizontal: 15,
         borderRadius: 20,
         borderColor: COLORS.secondary
     },
@@ -180,7 +173,8 @@ const styles = StyleSheet.create({
         paddingLeft: 15,
         paddingRight: 60,
         borderRadius: 10,
-        alignItems: "flex-start"
+        alignItems: "flex-start",
+        width: "100%"
     },
     inputLabel : {
         color: COLORS.white,
@@ -189,7 +183,7 @@ const styles = StyleSheet.create({
         fontWeight: "semibold"
     },
     buttonContainer: {
-        backgroundColor: COLORS.secondary,
+        backgroundColor: COLORS.primary,
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",

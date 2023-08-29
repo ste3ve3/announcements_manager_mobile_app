@@ -1,7 +1,6 @@
 import { Stack } from 'expo-router';
-import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity} from 'react-native';
+import { StyleSheet, SafeAreaView, TouchableOpacity} from 'react-native';
 import { COLORS } from '../../theme';
-import HeaderIcon from '../../components/home/elements/HeaderIcon';
 import { Entypo } from '@expo/vector-icons';
 import { useNavigation } from 'expo-router';
 import AnnouncementDetailsContainer from '../../components/details';
@@ -21,10 +20,6 @@ export default function App() {
                 <Entypo name="arrow-long-left" size={24} color={COLORS.lightWhite} />
               </TouchableOpacity>
             ),
-            headerRight: () => (
-                <HeaderIcon iconType="leftIcon" />
-            ),
-            
             headerTitle: ""
         }}
       />
