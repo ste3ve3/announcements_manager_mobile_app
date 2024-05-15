@@ -5,7 +5,10 @@
       "bundler": "metro"
     },
     "android": {
-      "permissions": ["INTERNET"]
+      "permissions": [
+        "INTERNET"
+      ],
+      "package": "com.anonymous.announcements_mobile_app"
     },
     "name": "announcements_mobile_app",
     "slug": "announcements_mobile_app"

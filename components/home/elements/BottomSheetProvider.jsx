@@ -1,9 +1,12 @@
-import React, { useRef, useEffect } from 'react';
-import { Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { COLORS, SIZES } from '../../../theme';
-import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import UserProfile from './UserProfile';
+import React, { useRef, useEffect } from "react";
+import { Text, TouchableOpacity, StyleSheet } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { COLORS, SIZES } from "../../../theme";
+import {
+  BottomSheetModal,
+  BottomSheetModalProvider,
+} from "@gorhom/bottom-sheet";
+import UserProfile from "./UserProfile";
 
 const BottomSheetProvider = ({ isBottomSheetVisible, onClose }) => {
   const bottomSheetModalRef = useRef(null);
@@ -21,8 +24,11 @@ const BottomSheetProvider = ({ isBottomSheetVisible, onClose }) => {
       <BottomSheetModal
         ref={bottomSheetModalRef}
         index={0}
-        snapPoints={['90%']}
-        backgroundStyle={{ borderRadius: 20, backgroundColor: COLORS.primary }}
+        snapPoints={["90%"]}
+        backgroundStyle={{
+          borderRadius: 20,
+          backgroundColor: COLORS.primary,
+        }}
         onDismiss={onClose}
       >
         <UserProfile onClose={onClose} />

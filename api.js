@@ -3,7 +3,7 @@ import useSWR from 'swr';
 // import { REACT_APP_BASE_URL } from '@env';
 
 export const API = axios.create({
-    baseURL: "https://announcements-be-c3a4b663bfeb.herokuapp.com",
+    baseURL: "https://test.toplineglobalhrconsulting.com",
     withCredentials: true
 });
 

@@ -1,6 +1,6 @@
 import { useMemo } from "react"
 import { View, Text,ScrollView, StyleSheet, TouchableOpacity,Dimensions, Linking } from "react-native"
-import { useSearchParams } from "expo-router"
+import { useLocalSearchParams } from "expo-router"
 import { useFetcher } from "../../api"
 import DataChecker from "../global/DataChecker"
 import { COLORS, SIZES } from "../../theme"
@@ -8,7 +8,7 @@ import HTML from 'react-native-render-html';
 import { MaterialIcons } from '@expo/vector-icons';
 
 const AnnouncementDetailsContainer = () => {
-    const { id } = useSearchParams()
+    const { id } = useLocalSearchParams()
     const { data , isLoading, isError } = useFetcher(`/announcement/getSingleAnnouncement?announcementId=${id}`); 
     const { announcementDetails } = useMemo(() => {
     if (data?.data) {

@@ -9,11 +9,11 @@ import { Entypo } from '@expo/vector-icons';
 import { useNavigation } from 'expo-router';
 import DataChecker from '../../components/global/DataChecker';
 import { useFetcher } from '../../api';
-import { useSearchParams } from "expo-router"
+import { useLocalSearchParams } from "expo-router"
 import TaskCard from '../../components/home/elements/TaskCard';
 
 export default function App() {
-  const { keyword } = useSearchParams()
+  const { keyword } = useLocalSearchParams()
   const navigate =  useNavigation();
   const { data , isLoading, isError } = useFetcher(`/announcement?keyword=${keyword}`);  
   const { announcements } = useMemo(() => {
